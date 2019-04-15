@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    var obj = {
+        b:30
+    };
+    // //数据属性
+    // Object.defineProperty(obj,'a',{
+    //     value:10,
+    //     writable:true, //是否可编辑
+    //     enumerable:false, //是否可枚举
+    //     configurable:false //是否可配置
+    // });
+    // // obj.a = 20;
+    // delete obj.a;
+    // console.log(obj);
+    for(var i in obj){
+        console.log(i);
+    }
+
+    var news = null;
+    //访问器属性
+    Object.defineProperty(obj,'b',{
+        get(){ //获取值
+            return news;
+        },
+        set(val){ // 设置值
+            console.log(val,'ste');
+            news = val;
+        }
+    });
+    obj.b = 999;
+    console.log(obj.b);
+
+
+    var  a = 40;
+    Object.defineProperty(window,'b',{
+        get(){
+            return 2*a;
+        }
+    });
+    console.log(b);
+</script>
+</html>

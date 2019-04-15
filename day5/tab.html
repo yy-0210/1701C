@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    header{
+        height: 44px;
+        width: 100%;
+        display: flex;
+    }
+    header span{
+        display: inline-block;
+        flex: 1;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+    }
+    header span.active{
+        background: red;
+        color: #fff;
+    }
+</style>
+<body>
+    <div id="app">
+        <header>
+            <span v-for="(item,index) in list" :class="{active:index == current}" @click="btnClick(index)">{{item.title}}</span>
+            <!-- <span>推荐</span> -->
+        </header>
+        <ul>
+            <li v-for="(item1,index1) in list[current].news" :style="[{color:isColor,fontSize:'30px'}]">{{item1.newsTitle}}</li>
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            current:0,
+            isColor:'red',
+            list:[{
+                title:'新闻',
+                news:[
+                    {
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗1"
+                    },
+                    {
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗2"
+                    },{
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗3"
+                    }
+                ]
+            },{
+                title:'推荐',
+                news:[
+                    {
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗4"
+                    },
+                    {
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗5"
+                    },{
+                        newsTitle:"向奔驰女车主收1.5万元，这笔金融服务费名正言顺吗6"
+                    }
+                ]
+            }]
+        },
+        methods: {
+            btnClick(ind){ //this 指的是vue的实例对象
+                console.log(ind,this,this.current);
+                this.current = ind;
+            }
+        },
+    });
+</script>
+</html>
