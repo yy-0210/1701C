@@ -1,15 +1,13 @@
 <template>
     <div>
-        <list :grade="grade" :count="count" :styles="style" :img="img" @addCount="add"></list>
+        <list></list>
     </div>
 </template>
 <script>
-// 第一步引入组件
-import list from './components/list';
 export default {
     data(){
-        return {
-            grade: "1701B",
+        return{
+            grade: "1612B",
             count: 24,
             style: {
                 height: "120px",
@@ -22,17 +20,8 @@ export default {
             ]
         }
     },
-    components:{ //第二步注册组件，第三部使用组件
+    components:{
         list
-    },
-    methods:{
-        add(count){
-            console.log(count);
-            this.count ++;
-        }
     }
 }
 </script>
-
-
-
