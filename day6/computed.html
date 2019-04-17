@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="add">补充货物</button>
+        <div>总价是：{{sumFn()}}</div>
+        <!-- 底部 -->
+        <div>总价是：{{sumFn()}}</div>
+        
+        <!-- 计算属性 -->
+        
+        <div>总价是：{{price}}</div>
+        <div>总价是：{{price}}</div>
+        <input type="text" v-model="name">
+        <p>{{str}}</p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            package1:{
+                count:1,
+                price:10
+            },
+            package2:{
+                count:2,
+                price:5
+            },
+            sum:0,
+            name:'',
+            grade:'1701C',
+            str:''
+        },
+        watch:{ //侦听器
+        //    name(news,old){ //监听属性,第一个参数是新值，第二个是老值
+        //        console.log(news,old);
+        //        console.log('11111');
+        //     //    this.str = this.grade + news;
+        //    } 
+        },
+        computed: { //计算属性
+            // price(){ //计算属性所依赖的数据（data）发生变化的时候，会触发计算属性,缓存属性，获取的话，用方法的这种形式
+            //     console.log('price');
+            //     return this.package1.count * this.package1.price + this.package2.count * this.package2.price;
+            // }
+            price:{ //如果需要设置的话，用对象的这种形式
+                get(){
+                    return this.package1.count * this.package1.price + this.package2.count * this.package2.price;
+                },
+                set(val){
+                    console.log(val,'val@@@@@@');
+                }
+            }
+        },
+        methods: {
+            add(){
+                this.package1.count++;
+                // this.price = 1000;
+                // this.sum = this.package1.count * this.package1.price + this.package2.count * this.package2.price
+                // console.log(this.package1.count);
+            },
+            sumFn(){
+                console.log('sum');
+                return this.package1.count * this.package1.price + this.package2.count * this.package2.price;
+            }
+        },
+    });
+    vm.$watch('name',(news,old)=>{
+        console.log(news,old);
+    });
+</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li>span:nth-child(1) {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        background: #ccc;
+    }
+    li>span.active{
+        background: red;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="text" @keydown.13="add">
+        <h3>正在进行</h3>
+        <ul>
+            <li v-for="(item,index) in ullist" @click="ulListFn(index,item)">
+                <span ></span>
+                <span>{{item}}</span>
+            </li>
+        </ul>
+        <h3>已经完成</h3>
+        <ol>
+            <li v-for="(item1,index1) in ollist" @click="olListFn(index1,item1)">
+                <span class="active"></span>
+                <span>{{item1}}</span>
+            </li>
+        </ol>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '',
+            ullist: [],
+            ollist: []
+        },
+        methods: {
+            add() {
+                console.log(this.text);
+                this.ullist.push(this.text);
+            },
+            ulListFn(index,item){
+                this.ullist.splice(index,1);
+                this.ollist.push(item);
+            },
+            olListFn(ind,item){
+                this.ollist.splice(ind,1);
+                this.ullist.push(item);
+            }
+        },
+    });
+</script>
+
+</html>
