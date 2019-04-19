@@ -12,6 +12,7 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 const list = require('../src/data/list.json');
+const datalist = require('../src/data/data.json');
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -46,6 +47,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       app.get('/api/list',(req,res,next)=>{
         res.send(list);
       });
+      app.get('/api/data',(req,res,next)=>{
+        res.send(datalist);
+      });
+
     }
   },
   plugins: [
