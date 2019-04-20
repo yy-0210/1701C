@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="content">
             <div class="left">
-                <ul>
+                <ul class="leftlist">
                     <li v-for="(item,index) in classify" :key="index" :class="{'active':index == ind}" @click="change(index,item.type)">{{item.title}}</li>
                 </ul>
             </div>
@@ -17,7 +17,8 @@
             </div>
         </div>
         <footer>
-            <div>
+            <my-dialog v-show="isShow" :buyList="buyList"></my-dialog>
+            <div @click="showDialog">
                 <span>总数：{{totalCount}}</span>
                 <span>总价：{{totalPrice}}</span>
             </div>
@@ -28,19 +29,22 @@
 import classify from './js/classify';
 import list from './js/list';
 import myList from './components/my-list';
+import myDialog from './components/dialog';
 export default {
     props:{
 
     },
     components:{
-        myList
+        myList,
+        myDialog
     },
     data(){
         return {
             classify:[],
             list:[],
             buyList:[],
-            ind:0
+            ind:0,
+            isShow:false
         }
     },
     computed:{
@@ -58,6 +62,9 @@ export default {
         change(ind,type){ //切换
             this.ind = ind;
             this.list = this.getList(list,type);
+        },
+        showDialog(){
+            this.isShow = !this.isShow;
         }
     },
     created(){
@@ -65,14 +72,18 @@ export default {
         //刷新之后的数据
         this.list = this.getList(list,this.classify[0].type);
         console.log(this);
-        this.$bus.$on('addCount',(num,id)=>{
+        this.$bus.$on('addCount',(num,id,type)=>{
             console.log(num);
+            this.list = this.getList(list,type);
             let index = this.list.findIndex(item => item.id == id);
             this.list[index].num = num;
             let ind = this.buyList.findIndex(item => item.id==id);
             if(ind == -1){
                 this.buyList.push(this.list[index]);
             }
+
+            let cur = this.classify.findIndex(item => item.type == type);
+            this.ind = cur;
         });
     },
     mounted(){
@@ -111,13 +122,13 @@ export default {
         height: 100%;
         border-right: 1px solid #ccc;;
     }
-    li{
+    .leftlist li{
         height: 80px;
         line-height: 80px;
         text-align: center;
         border-bottom: 1px solid #ccc;
     }
-    li.active{
+   .leftlist li.active{
         color: red;
     }
     .right{
