@@ -17,6 +17,7 @@ import axios from "axios";
 import myList from "../components/my-list";
 import BScroll from "better-scroll";
 export default {
+    name:'dican',
     props: {},
     components: {
         myList
@@ -31,7 +32,19 @@ export default {
             rightBScroll: null
         };
     },
-    computed: {},
+    computed: {
+        currentIndex(){
+            for(let j=0;j<this.scrollH.length;j++){
+                let height1 = this.scrollH[j];
+                let height2 = this.scrollH[j+1];
+                if(height2 && (this.scrollY >= height1 && this.scrollY < height2)){
+                    return j;
+                }
+            }
+
+            return 0;
+        }
+    },
     methods: {
         init() {
             //better 初始化
@@ -43,7 +56,8 @@ export default {
             });
 
             this.rightBScroll.on("scroll", res => {
-                console.log(1111);
+                console.log(this.currentIndex);
+                this.ind = this.currentIndex;
                 this.scrollY = Math.abs(res.y);
                 console.log(this.scrollY);
             });

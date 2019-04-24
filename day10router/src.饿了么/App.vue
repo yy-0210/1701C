@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    
+    <!-- <img src="./assets/logo.png"> -->
+    <!-- <He> -->
     <router-view/>
     
   </div>
@@ -37,9 +38,8 @@ html,body,#app{
   display: flex;
   flex-direction: column;
 }
-
-.page > div{
-    flex: 1;
+.page{
+  flex: 1;
 }
 footer{
   height: 50px;

@@ -1,120 +1,80 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Tab from '@/views/tab'
-import Home from '@/views/home'
-import Discover from '@/views/discover'
-import Order from '@/views/order'
-import Profile from '@/views/profile'
-import Search from '@/views/search'
-import Shop from '@/views/shop'
-import Dican from '@/views/dican'
-import Comment from '@/views/comment'
-import Bussi from '@/views/bussi'
+import Vue from 'vue';
+import Router from 'vue-router';
+// import Home from '../views/home';
+// import Vedio from '../views/vedio';
+// import News from '../views/news';
+// import Frum from '../views/frum';
+// import List from '../views/list';
+// import Live from '../views/live';
+import Newest from '../views/newest';
+import Hottest from '../views/hottest';
+import Detail from '../views/detail';
 
-Vue.use(Router)
+
+const Home = () => import('../views/home'); //按需加载
+const Vedio = () => import('../views/vedio'); //按需加载
+const News = () => import('../views/news'); //按需加载
+const Frum = () => import('../views/frum'); //按需加载
+const List = () => import('../views/list'); //按需加载
+const Live = () => import('../views/live'); //按需加载
+// const Newest = resolve = ()=> require(['../views/newest'],resolve); //异步加载
+
+Vue.use(Router);
+
+
+const routes = [
+  {
+    path:'/',
+    name:'home',
+    component:Home,
+    redirect:{name:'live'},
+    children:[
+      {
+        path:'live',
+        name:'live',
+        component:Live
+      },
+      {
+        path:'newest',
+        name:'newest',
+        component:Newest
+      },
+      {
+        path:'hottest',
+        name:'hottest',
+        component:Hottest
+      }
+    ]
+  },
+  {
+    path:'/vedio',
+    name:'vedio',
+    component:Vedio
+  },
+  {
+    path:'/news',
+    name:'news',
+    component:News
+  },
+  {
+    path:'/frum',
+    name:'frum',
+    component:Frum
+  },{
+    path:'/list',
+    name:'list',
+    component:List
+  },{
+    path:'/detail/:id',
+    name:'detail',
+    component:Detail
+  }
+];
+
 
 const router = new Router({
-  mode: 'hash',
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      meta:{
-        title:'首页'
-      },
-      component: Home
-    },
-    {
-      path: '/discover',
-      name: 'discover',
-      meta:{
-        title:'发现'
-      },
-      component: Discover
-    },
-    {
-      path: '/order',
-      name: 'order',
-      meta:{
-        title:'订单'
-      },
-      component: Order
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      meta:{
-        title:'我的'
-      },
-      component: Profile
-    }, {
-      path: '/search',
-      name: 'search',
-      component: Search
-    },{
-      path:'/shop',
-      component:Shop,
-      beforeEnter(to,from,next){
-        next('/');
-      }
-    },
-    {
-      path: '/shop/:id',
-      name: 'shop',
-      component: Shop,
-      children:[ //子路由
-        {
-          path:'dican',
-          name:'dican',
-          component:Dican
-        },
-        {
-          path:'comment',
-          name:'comment',
-          component:Comment
-        },
-        {
-          path:'bussi',
-          name:'bussi',
-          component:Bussi
-        }
-      ]
-    }
-  ]
-})
-
-
-export default  router;
-
-
-const login = ['order','profile'];
-//全局前置守卫
-router.beforeEach((to,from,next)=>{
-  // console.log(to);
-  // console.log(from);
-  // console.log(next);
-  //  next();
-  if(login.includes(to.name)){ //权限验证
-      let useId = window.localStorage.getItem('userId');
-      if(useId){
-        next();
-      } else {
-        next('/');
-      }
-  } else {
-    next();
-  }
+  routes
 });
 
 
-//全局后置守卫
-router.afterEach((to, from) => {
-  // ...
-  console.log(to)
-  console.log(from)
-  if(to.meta && to.meta.title){
-    document.title = to.meta.title;
-  } else {
-    document.title = '1701C'
-  }
-})
+export default router;

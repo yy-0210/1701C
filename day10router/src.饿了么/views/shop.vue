@@ -6,7 +6,9 @@
             <li @click="$router.push({name:'comment'})">评价</li>
             <li @click="$router.push({name:'bussi'})">商家</li>
         </ul>
-        <router-view></router-view>
+        <keep-alive include="dican">
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 <script>
