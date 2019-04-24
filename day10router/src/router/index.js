@@ -19,21 +19,33 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
+      meta:{
+        title:'首页'
+      },
       component: Home
     },
     {
       path: '/discover',
       name: 'discover',
+      meta:{
+        title:'发现'
+      },
       component: Discover
     },
     {
       path: '/order',
       name: 'order',
+      meta:{
+        title:'订单'
+      },
       component: Order
     },
     {
       path: '/profile',
       name: 'profile',
+      meta:{
+        title:'我的'
+      },
       component: Profile
     }, {
       path: '/search',
@@ -76,11 +88,11 @@ export default  router;
 
 
 const login = ['order','profile'];
-
+//全局前置守卫
 router.beforeEach((to,from,next)=>{
-  console.log(to);
-  console.log(from);
-  console.log(next);
+  // console.log(to);
+  // console.log(from);
+  // console.log(next);
   //  next();
   if(login.includes(to.name)){ //权限验证
       let useId = window.localStorage.getItem('userId');
@@ -93,3 +105,16 @@ router.beforeEach((to,from,next)=>{
     next();
   }
 });
+
+
+//全局后置守卫
+router.afterEach((to, from) => {
+  // ...
+  console.log(to)
+  console.log(from)
+  if(to.meta && to.meta.title){
+    document.title = to.meta.title;
+  } else {
+    document.title = '1701C'
+  }
+})
