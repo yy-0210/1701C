@@ -18,6 +18,7 @@ const Frum = () => import('../views/frum'); //按需加载
 const List = () => import('../views/list'); //按需加载
 const Live = () => import('../views/live'); //按需加载
 // const Newest = resolve = ()=> require(['../views/newest'],resolve); //异步加载
+// const Newest = resolve =  require(['../views/newest'],resolve); //异步加载
 
 Vue.use(Router);
 
