@@ -1,17 +1,16 @@
 <template>
-    <div>
-        <div>add组件：{{count}}</div>
-        <button>递增</button>
-    </div>
+    <li>
+        <p>商品名：{{title}}</p>
+        <p>商品价格：{{price}}</p>
+       <my-count :num="num" :id="id"></my-count>
+    </li>
 </template>
 <script>
-import {mapState} from 'vuex';
+import myCount from './count';
 export default {
-    props:{
-
-    },
+    props:['title','price','num','id'],
     components:{
-
+        myCount
     },
     data(){
         return {
@@ -19,10 +18,10 @@ export default {
         }
     },
     computed:{
-        ...mapState(['count'])
+
     },
     methods:{
-       
+
     },
     created(){
 

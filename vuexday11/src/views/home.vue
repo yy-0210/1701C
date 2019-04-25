@@ -1,25 +1,27 @@
 <template>
     <div>
-        首页
-        <div>home组件{{$store.state.count}}</div>
-        <div>$store:{{$store.state.list}}</div>
-        <div>computed::{{getList}}</div>
-        <div>getters::{{$store.getters.getList}}</div>
-        <my-add></my-add>
-        <my-del></my-del>
-        <button @click="add">点击</button>
+        <my-list v-for="(item,index) in getList" :key="index"
+        :title="item.title"
+        :price="item.price"
+        :num="item.num"
+        :id="item.id"
+        ></my-list>
+        <div>总价：{{getTotalPrice}}</div>
+
+
+
+
     </div>
 </template>
 <script>
-import myAdd from '../components/add';
-import myDel from '../components/del';
+import myList from '../components/my-list';
+import {mapGetters} from 'vuex';
 export default {
     props:{
 
     },
     components:{
-        myAdd,
-        myDel
+        myList
     },
     data(){
         return {
@@ -27,18 +29,13 @@ export default {
         }
     },
     computed:{
-        getList(){
-            return this.$store.state.list.filter(item => item.count >30);
-        }
+        ...mapGetters(['getList','getTotalPrice'])
     },
     methods:{
-        add(){
-            console.log(this);
-            this.$store.dispatch('addActions',6);
-        }
+
     },
     created(){
-        console.log(this);
+
     },
     mounted(){
 

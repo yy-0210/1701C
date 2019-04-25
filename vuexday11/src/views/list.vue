@@ -1,11 +1,10 @@
 <template>
     <div>
-        <div>del组件：{count}}</div>
-        <button @click="del">递减</button>
+        
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 export default {
     props:{
 
@@ -19,12 +18,10 @@ export default {
         }
     },
     computed:{
-        ...mapState(['count'])
+        ...mapGetters(['getList'])
     },
     methods:{
-        // del(){
-        //     this.$store.commit('del');
-        // }
+
     },
     created(){
 
