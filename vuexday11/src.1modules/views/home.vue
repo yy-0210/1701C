@@ -13,6 +13,7 @@
         <div @click="addActions(5)">点击</div>
         <button @click="addlist({grade:'1610A',count:50})">添加</button>
         <my-add></my-add>
+        <my-del></my-del>
     </div>  
 </template>
 <script>
@@ -33,12 +34,18 @@ export default {
         }
     },
     computed:{
+        // count(){
+        //     return this.$store.list.file
+        // },
         ...mapState(['count','list']),
         ...mapGetters(['getList','getLength'])
     },
     methods:{
         ...mapMutations(['addlist']),
-        ...mapActions(['addActions'])
+        ...mapActions(['addActions']),
+        // addActions(){
+        //     this.$store.dispatch('',99);
+        // }
     },
     created(){
         console.log(this);

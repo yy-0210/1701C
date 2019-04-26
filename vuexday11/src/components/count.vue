@@ -1,39 +1,38 @@
 <template>
     <div>
-        <span @click="del(id)">-</span>
-        <span>{{num}}</span>
+        <div v-if="num">
+            <span @click="del(id)">-</span>
+            <span>{{num}}</span>
+        </div>
         <span @click="add(id)">+</span>
-
-
-        <div>count:{{getTotalPrice}}</div>
     </div>
 </template>
 <script>
-import {mapMutations,mapGetters} from 'vuex';
+import {mapMutations} from 'vuex';
 export default {
-    props:['num','id'],
-    components:{
-
+    props: ["num", "id", "type"],
+    components: {},
+    data() {
+        return {};
     },
-    data(){
-        return {
-
-        }
-    },
-    computed:{
-        ...mapGetters(['getTotalPrice'])
-    },
-    methods:{
+    computed: {},
+    methods: {
         ...mapMutations(['add','del'])
+        // add() {
+        //     let num = this.num + 1;
+        //     this.$bus.$emit("addCount", num, this.id,this.type);
+        // },
+        // del() {
+        //     let num = this.num - 1;
+        //     this.$bus.$emit("addCount", num, this.id,this.type);
+        // }
     },
-    created(){
-
-    },
-    mounted(){
-
-    }
-}
+    created() {},
+    mounted() {}
+};
 </script>
 <style scoped lang="">
-
+div {
+    font-size: 28px;
+}
 </style>

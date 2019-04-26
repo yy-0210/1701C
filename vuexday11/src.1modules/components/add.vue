@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div>del组件：{count}}</div>
-        <button @click="del">递减</button>
+        <div>add组件：{{count}}</div>
+        <button @click="add(5)">递增</button>
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState,mapMutations} from 'vuex';
 export default {
     props:{
 
@@ -22,8 +22,9 @@ export default {
         ...mapState(['count'])
     },
     methods:{
-        // del(){
-        //     this.$store.commit('del');
+        ...mapMutations(['add']),
+        // add(){
+        //     // this.$store.commit('add',{})
         // }
     },
     created(){

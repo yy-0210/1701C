@@ -19,7 +19,11 @@ export default new Vuex.Store({
                 grade:'1612A',
                 count:32
             }
-        ]
+        ],
+        obj:{
+
+        },
+        flag:true
     },
     getters:{
         getList(state){
@@ -28,21 +32,30 @@ export default new Vuex.Store({
         getLength(state,getters){
             return getters.getList.length;
         }
+
     },
     mutations:{
+        add(state,obj){
+            state.count+=obj;
+        },
+        del(state){
+            state.count--;
+        },
         addlist(state,obj){
             console.log(state,9999);
             state.list.push(obj);
-        },
-        add(state,num){
-            state.count+=num;
         }
+        // add(state,num){
+        //     state.count+=num;
+        // }
+
     },
     actions:{
         addActions({commit},num){
             setTimeout(()=>{
                 commit('add',num);
             },2000);
-        }
+        },
+        
     }
 });
