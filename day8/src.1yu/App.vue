@@ -3,30 +3,31 @@
         <div class="content">
             <div class="left">
                 <ul class="leftlist">
-                    <li v-for="(item,index) in getClassify" :key="index" :class="{'active':index == ind}" @click="change(index,item.type)">{{item.title}}</li>
+                    <li v-for="(item,index) in classify" :key="index" :class="{'active':index == ind}" @click="change(index,item.type)">{{item.title}}</li>
                 </ul>
             </div>
             <div class="right">
-                <my-list v-for="(item1,index1) in getList(getClassify[ind].type)" :key="index1"
+                <my-list v-for="(item1,index1) in list" :key="index1"
                 :title="item1.title"
                 :price="item1.price"
                 :num="item1.num"
                 :id="item1.id"
+                :type="item1.type"
                 ></my-list>
             </div>
-            <!-- {{getList(getClassify[0].type)}} -->
         </div>
         <footer>
-            <my-dialog v-show="isShow" :buyList="getBuyList"></my-dialog>
+            <my-dialog v-show="isShow" :buyList="buyList"></my-dialog>
             <div @click="showDialog">
-                <span>总数：{{getTotalCount}}</span>
-                <span>总价：{{getTotalPrice}}</span>
+                <span>总数：{{totalCount}}</span>
+                <span>总价：{{totalPrice}}</span>
             </div>
         </footer>
     </div>
 </template>
 <script>
-import {mapGetters,mapMutations} from 'vuex';
+import classify from './js/classify';
+import list from './js/list';
 import myList from './components/my-list';
 import myDialog from './components/dialog';
 export default {
@@ -39,27 +40,51 @@ export default {
     },
     data(){
         return {
+            classify:[],
+            list:[],
+            buyList:[],
             ind:0,
             isShow:false
         }
     },
     computed:{
-        ...mapGetters(['getClassify','getList','getTotalPrice','getTotalCount','getBuyList'])
+        totalPrice(){//[1,2,3]
+            return this.buyList.reduce((prev,cur)=> prev + cur.num * cur.price,0);
+        },
+        totalCount(){
+            return this.buyList.reduce((prev,cur)=> prev + cur.num ,0);
+        }
     },
     methods:{
-        // ...mapMutations(['getList']),
+        getList(list,type){ //刷选数据
+            return list.filter(item => item.type == type);
+        },
+        change(ind,type){ //切换
+            this.ind = ind;
+            this.list = this.getList(list,type);
+        },
         showDialog(){
             this.isShow = !this.isShow;
-        },
-        change(ind,type){
-            console.log(ind,type);
-            this.ind = ind;
-            // this.getList(type);
         }
     },
     created(){
-        // let type = this.getClassify[0].type
-        // console.log(this.getList(type));
+        this.classify = classify;
+        //刷新之后的数据
+        this.list = this.getList(list,this.classify[0].type);
+        console.log(this);
+        this.$bus.$on('addCount',(num,id,type)=>{
+            console.log(num);
+            this.list = this.getList(list,type);
+            let index = this.list.findIndex(item => item.id == id);
+            this.list[index].num = num;
+            let ind = this.buyList.findIndex(item => item.id==id);
+            if(ind == -1){
+                this.buyList.push(this.list[index]);
+            }
+
+            let cur = this.classify.findIndex(item => item.type == type);
+            this.ind = cur;
+        });
     },
     mounted(){
 

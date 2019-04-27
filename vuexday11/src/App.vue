@@ -48,20 +48,10 @@ export default {
     },
     computed:{
         ...mapGetters(['getClassify','getList','getTotalPrice','getTotalCount','getBuyList'])
-        // totalPrice(){//[1,2,3]
-        //     return this.buyList.reduce((prev,cur)=> prev + cur.num * cur.price,0);
-        // },
-        // totalCount(){
-        //     return this.buyList.reduce((prev,cur)=> prev + cur.num ,0);
-        // }
     },
     methods:{
-        // getList(list,type){ //刷选数据
-        //     return list.filter(item => item.type == type);
-        // },
         change(ind,type){ //切换
             this.ind = ind;
-            // this.list = this.getList(list,type);
         },
         showDialog(){
             this.isShow = !this.isShow;
@@ -69,23 +59,7 @@ export default {
     },
     created(){
         console.log(this);
-        // this.classify = classify;
-        // //刷新之后的数据
-        // this.list = this.getList(list,this.classify[0].type);
-        // console.log(this);
-        // this.$bus.$on('addCount',(num,id,type)=>{
-        //     console.log(num);
-        //     this.list = this.getList(list,type);
-        //     let index = this.list.findIndex(item => item.id == id);
-        //     this.list[index].num = num;
-        //     let ind = this.buyList.findIndex(item => item.id==id);
-        //     if(ind == -1){
-        //         this.buyList.push(this.list[index]);
-        //     }
-
-        //     let cur = this.classify.findIndex(item => item.type == type);
-        //     this.ind = cur;
-        // });
+       
     },
     mounted(){
 

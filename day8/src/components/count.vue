@@ -1,29 +1,31 @@
 <template>
     <div>
         <div v-if="num">
-            <span @click="del">-</span>
+            <span @click="del(id)">-</span>
             <span>{{num}}</span>
         </div>
-        <span @click="add">+</span>
+        <span @click="add(id)">+</span>
     </div>
 </template>
 <script>
+import {mapMutations} from 'vuex';
 export default {
-    props: ["num", "id", "type"],
+    props: ["num", "id"],
     components: {},
     data() {
         return {};
     },
     computed: {},
     methods: {
-        add() {
-            let num = this.num + 1;
-            this.$bus.$emit("addCount", num, this.id,this.type);
-        },
-        del() {
-            let num = this.num - 1;
-            this.$bus.$emit("addCount", num, this.id,this.type);
-        }
+        ...mapMutations(['add','del'])
+        // add() {
+        //     let num = this.num + 1;
+        //     this.$bus.$emit("addCount", num, this.id,this.type);
+        // },
+        // del() {
+        //     let num = this.num - 1;
+        //     this.$bus.$emit("addCount", num, this.id,this.type);
+        // }
     },
     created() {},
     mounted() {}

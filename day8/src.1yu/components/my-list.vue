@@ -4,14 +4,14 @@
        <dd>
            <p>商品：{{title}}</p>
            <p>价格：{{price}}</p>
-           <my-count :num="num" :id="id"></my-count>
+           <my-count :num="num" :id="id" :type="type"></my-count>
        </dd>
    </dl>
 </template>
 <script>
 import myCount from './count';
 export default {
-    props:['title','price','id','num'],
+    props:['title','price','id','num','type'],
     components:{
         myCount
     },
