@@ -1,14 +1,22 @@
 <template>
     <div class="dialog">
-
+        666
+        <my-list v-for="(item1,index) in getbuyList" :key="index"
+         :img="item1.img"
+                :title="item1.title"
+                :price="item1.price"
+                :num="item1.num"
+                :id="item1.id"
+        ></my-list>
     </div>
 </template>
 <script>
 import {mapGetters} from 'vuex';
+import myList from './my-list';
 export default {
     props:['buylist'],
     components:{
-
+        myList
     },
     data(){
         return {
