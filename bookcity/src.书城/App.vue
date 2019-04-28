@@ -17,15 +17,4 @@ export default {
   padding: 0;
   list-style: none;
 }
-html,body,#app{
-  height: 100%;
-  width: 100%;
-
-}
-#app > div{
-  height: 100%;
-  width: 100%;
-}
-
-
 </style>

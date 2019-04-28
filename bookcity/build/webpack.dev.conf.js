@@ -14,6 +14,8 @@ const home = require('../src/data/home.json');
 const recommend1 = require('../src/data/recommend1.json');
 const detail = require('../src/data/detail.json');
 
+const list = require('../src/data/list.json');
+
 
 const bodyParser = require('body-parser');
 
@@ -76,6 +78,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         }
       });
 
+      app.get('/api/list',(req,res,next)=>{
+         res.send(list);
+      });
     }
   },
   plugins: [
