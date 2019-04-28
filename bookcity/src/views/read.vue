@@ -1,10 +1,6 @@
 <template>
     <div>
-        <my-header>
-            <span><</span>
-            <input type="text">
-            <span>搜素</span>
-        </my-header>
+        阅读页面
     </div>
 </template>
 <script>
