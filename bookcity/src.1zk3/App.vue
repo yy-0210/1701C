@@ -1,17 +1,13 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <router-view />
-    <my-footer></my-footer>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  data(){
-      buyList:[]
-  }
+  name: 'App'
 }
 </script>
 
@@ -27,12 +23,9 @@ html,body,#app{
   overflow: hidden;
 
 }
-#app {
-  display: flex;
-  flex-direction: column;
-}
-#app>div{
-  flex: 1;
+#app > div{
+  height: 100%;
+  width: 100%;
 }
 
 

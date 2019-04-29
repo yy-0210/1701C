@@ -15,6 +15,7 @@ const recommend1 = require('../src/data/recommend1.json');
 const detail = require('../src/data/detail.json');
 
 const list = require('../src/data/list.json');
+const shoplist = require('../src/data/shoplist.json');
 
 
 const bodyParser = require('body-parser');
@@ -81,6 +82,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       app.get('/api/list',(req,res,next)=>{
          res.send(list);
       });
+
+      app.get('/api/shoplist',(req,res,next)=>{
+        res.send(shoplist);
+      });
+
     }
   },
   plugins: [

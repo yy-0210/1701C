@@ -1,56 +1,39 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 Vue.use(Vuex);
-
 
 export default new Vuex.Store({
     state:{
-        list:[],
         buyList:[]
     },
     getters:{
-        getlistGetters(state){
-            return state.list;
-            console.log(state.list);
+        getBuyList(state){
+            return state.buyList
+        },
+        getTotalCount(state){
+            return state.buyList.reduce((prev,cur) => prev + cur.count,0);
         },
         getTotalPrice(state){
-            let sum = 0;
-            state.list.forEach(item => {
-               sum += item.res.reduce((prev,next) => {
-                    return prev + next.num * next.price;
-                },0);
-            });
-            return sum.toFixed(2);
-        },
-        getbuyList(state){
-            return state.buyList;
+            return state.buyList.reduce((prev,cur) => prev + cur.count* cur.price,0);
         }
     },
     mutations:{
-        getListMutations(state,arr){
-            console.log('getListMutations');
-            state.list = arr;
-        },
-        add(state,{ind,index,n}){
-            console.log(ind,index,n);
-            state.list[ind].res[index].num = n;
-            let id = state.list[ind].res[index].id;
-            console.log(id);
-            let current = state.buyList.findIndex(item => item.id == id);
-            if(current == -1){
-                state.buyList.push(state.list[ind].res[index]);
-            } 
+        shop(state,item){
+            let index = state.buyList.findIndex(item1 => item1.id == item.id);
+            if(index == -1){
+                state.buyList.push(item);
+            }
             console.log(state.buyList);
+        },
+        checkClick(state,ind){
+            state.buyList[ind].flag = !state.buyList[ind].flag;
+            console.log(state.buyList[ind]);
+        },
+        allClickMutaions(state,flag){
+            state.buyList.forEach(item => item.flag = flag);
         }
     },
     actions:{
-        getList({commit}){
-            console.log('actions');
-            axios.get('/api/list').then((res)=>{
-                console.log(res.data);
-                commit('getListMutations',res.data);
-            });
-        }
+
     }
-});
+})

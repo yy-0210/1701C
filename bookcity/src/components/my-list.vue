@@ -1,32 +1,46 @@
 <template>
-    <dl>
-        <dt>
-            <img :src="img" alt="">
-        </dt>
-        <dd>
-            <p>{{title}}</p>
-            <p>{{price}}</p>
-            <my-count :num="num" :id="id" :ind="ind" :index="index"></my-count>
-        </dd>
-    </dl>
+   <dl>
+       <dt>
+           <img :src="item.img" alt="">
+       </dt>
+       <dd>
+           <p>{{item.title}}</p>
+           <p>{{item.content}}</p>
+           <p>{{item.price}}</p>
+           <span @click="goToShop(item)">购物</span>
+       </dd>
+   </dl>
 </template>
 <script>
-import myCount from './count';
+import {mapGetters,mapMutations} from 'vuex';
 export default {
-    props:['img','title','price','num','id','index','ind'],
+    props:{
+        item:Object
+    },
     components:{
-        myCount
+
     },
     data(){
         return {
-
+            // buyList:[]
         }
     },
     computed:{
-
+        ...mapGetters(['getBuyList'])
     },
     methods:{
-
+        ...mapMutations(['shop']),
+        goToShop(obj){
+            let index = this.getBuyList.findIndex(item => item.id == obj.id);
+            if(index == -1){
+                // obj.count = 1;
+                this.$set(obj,'count',1); //后添加进来的数据，需要追踪，用this.$set(要改变的对象,对象下边要添加哪个属性，当前属性的值是多少)
+                this.$set(obj,'flag',false); //后添加进来的数据，需要追踪，用this.$set(要改变的对象,对象下边要添加哪个属性，当前属性的值是多少)
+            } else {
+                obj.count++;
+            }
+            this.shop(obj);
+        }
     },
     created(){
 
@@ -37,12 +51,5 @@ export default {
 }
 </script>
 <style scoped lang="">
-dl dt{
-    height: 120px;
-    width: 120px;
-}
-dl dt img{
-    height: 100%;
-    width: 100%;
-}
+
 </style>
