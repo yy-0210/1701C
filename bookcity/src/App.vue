@@ -8,10 +8,7 @@
 
 <script>
 export default {
-  name: 'App',
-  data(){
-      buyList:[]
-  }
+  name: 'App'
 }
 </script>
 

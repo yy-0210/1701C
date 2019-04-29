@@ -9,9 +9,9 @@
                <dd>
                    <p>{{item.title}}</p>
                    <p>{{item.price}}</p>
-                   <span>-</span>
+                   <span @click="add({index,n:item.count-1})">-</span>
                    <span>{{item.count}}</span>
-                   <span>+</span>
+                   <span @click="add({index,n:item.count+1})">+</span>
                </dd>
            </dl>
         </div>
@@ -40,7 +40,7 @@ export default {
         ...mapGetters(['getBuyList','getTotalPrice'])
     },
     methods:{
-        ...mapMutations(['checkClick','allClickMutaions']),
+        ...mapMutations(['checkClick','allClickMutaions','add']),
         check(ind){
             this.checkClick(ind);
             this.allCheck = this.getBuyList.every(item => item.flag);

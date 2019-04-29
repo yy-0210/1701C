@@ -14,7 +14,8 @@ export default new Vuex.Store({
             return state.buyList.reduce((prev,cur) => prev + cur.count,0);
         },
         getTotalPrice(state){
-            return state.buyList.reduce((prev,cur) => prev + cur.count* cur.price,0);
+            // return state.buyList.reduce((prev,cur) => prev + cur.count* cur.price,0);
+          return  state.buyList.filter(item => item.flag).reduce((prev,cur) => prev + cur.count * cur.price,0);
         }
     },
     mutations:{
@@ -31,6 +32,9 @@ export default new Vuex.Store({
         },
         allClickMutaions(state,flag){
             state.buyList.forEach(item => item.flag = flag);
+        },
+        add(state,{index,n}){
+            state.buyList[index].count = n;
         }
     },
     actions:{
