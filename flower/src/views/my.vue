@@ -1,19 +1,22 @@
 <template>
     <div>
         <div class="page">
-            我的
+            {{getListGetters}}
         </div>
         <my-footer></my-footer>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
     props: {},
     components: {},
     data() {
         return {};
     },
-    computed: {},
+    computed: {
+        ...mapGetters(['getListGetters'])
+    },
     methods: {},
     created() {},
     mounted() {}
