@@ -1,8 +1,8 @@
 <template>
     <footer>
-        <router-link to="/">电影</router-link>
-        <router-link to="/cinema">影院</router-link>
-        <router-link to="/preferential">特惠</router-link>
+        <router-link to="/">首页</router-link>
+        <router-link to="/classify">分类</router-link>
+        <router-link to="/shop">购物车{{getTotalCount}}</router-link>
         <router-link to="/my">我的</router-link>
     </footer>
 </template>
@@ -13,7 +13,7 @@ export default {
 
     },
     components:{
-        
+
     },
     data(){
         return {

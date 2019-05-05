@@ -1,27 +1,45 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 const Home = () => import('@/views/home');
-const Classify = () => import('@/views/classify');
-const Shop = () => import('@/views/shop');
+const Cinema = () => import('@/views/cinema');
+const Preferential = () => import('@/views/preferential');
 const My = () => import('@/views/my');
+const Release = () => import('@/views/release');
+const Received = () => import('@/views/received');
 
 Vue.use(Router);
 
 const routes= [
   {
     path:'/',
+    redirect:{name:'release'}
+  },
+  {
+    path:'/home',
     name:'home',
-    component:Home
+    component:Home,
+    children:[
+      {
+        path:'release',
+        name:'release',
+        component:Release
+      },
+      {
+        path:'received',
+        name:'received',
+        component:Received
+      }
+    ]
   },
   {
-    path:'/classify',
-    name:'classify',
-    component:Classify
+    path:'/cinema',
+    name:'cinema',
+    component:Cinema
   },
   {
-    path:'/shop',
-    name:'shop',
-    component:Shop
+    path:'/preferential',
+    name:'preferential',
+    component:Preferential
   },
   {
     path:'/my',

@@ -1,6 +1,8 @@
 <template>
     <div>
         我的
+
+    <my-footer></my-footer>
     </div>
 </template>
 <script>

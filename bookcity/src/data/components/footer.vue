@@ -1,19 +1,18 @@
 <template>
     <footer>
-        <router-link to="/">电影</router-link>
+        <router-link to="/film">电影</router-link>
         <router-link to="/cinema">影院</router-link>
         <router-link to="/preferential">特惠</router-link>
         <router-link to="/my">我的</router-link>
     </footer>
 </template>
 <script>
-import {mapGetters} from 'vuex';
 export default {
     props:{
 
     },
     components:{
-        
+
     },
     data(){
         return {
@@ -21,7 +20,6 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['getTotalCount'])
     },
     methods:{
 
@@ -38,12 +36,11 @@ export default {
 footer{
     height: 50px;
     width: 100%;
-    display: flex;
     background: cornflowerblue;
+    display:flex;
+
 }
 footer a{
     flex: 1;
-    text-align: center;
-    line-height: 50px;
 }
 </style>
