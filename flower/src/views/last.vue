@@ -1,9 +1,10 @@
 <template>
     <div>
-        <button @click="goToDetail()">开始答题</button>
+        最后的页面,回答对了{{getLength}}道题
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 export default {
     props:{
 
@@ -17,12 +18,10 @@ export default {
         }
     },
     computed:{
-
+        ...mapGetters(['getLength'])
     },
     methods:{
-        goToDetail(){
-            this.$router.push({path:'/detail'});
-        }
+
     },
     created(){
 

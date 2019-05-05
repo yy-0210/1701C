@@ -1,15 +1,19 @@
 <template>
     <div>
-        <button @click="goToDetail()">开始答题</button>
+        <my-header></my-header>
+        <my-answer></my-answer>
     </div>
 </template>
 <script>
+import myHeader from '../components/header'
+import myAnswer from '../components/answer'
 export default {
     props:{
 
     },
     components:{
-
+        myHeader,
+        myAnswer
     },
     data(){
         return {
@@ -20,9 +24,7 @@ export default {
 
     },
     methods:{
-        goToDetail(){
-            this.$router.push({path:'/detail'});
-        }
+
     },
     created(){
 

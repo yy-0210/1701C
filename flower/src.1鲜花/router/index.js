@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 const Home = () => import('@/views/home')
-const Detail = () => import('@/views/detail')
-const Last = () => import('@/views/last')
+const Classify = () => import('@/views/classify')
+const My = () => import('@/views/my')
 const List = () => import('@/views/list')
 
 Vue.use(Router)
@@ -20,14 +20,14 @@ export default new Router({
       component: Home
     },
     {
-      path: '/detail',
-      name: 'detail',
-      component: Detail
+      path: '/classify',
+      name: 'classify',
+      component: Classify
     },
     ,{
-      path: '/last',
-      name: 'last',
-      component: Last
+      path: '/my',
+      name: 'my',
+      component: My
     },{
       path: '/list/:type',
       name: 'list',
